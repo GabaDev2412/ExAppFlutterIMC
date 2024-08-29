@@ -15,8 +15,8 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, Icon> navigationItems = {
-      'Home': Platform.isIOS ? const Icon(CupertinoIcons.house_fill) : const Icon(Icons.home),
-      'Calculator': const Icon(Icons.calculate),
+      'Calculate IMC': Platform.isIOS ? const Icon(CupertinoIcons.house_fill) : const Icon(Icons.calculate),
+      'List IMC\'s': const Icon(Icons.list),
     };
 
     return Platform.isIOS

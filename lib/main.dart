@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './widgets/bottom_bar.dart';  // Import the BottomBar widget
+import 'package:myapp/widgets/bottom_bar.dart';
+import 'package:myapp/pages/build_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,24 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _currentWidget = _buildPage(_currentIndex);
-  }
-
-  Widget _buildPage(int index) {
-    switch (index) {
-      case 0:
-        return const Center(child: Text('Welcome to the IMC Calculator!'));
-      case 1:
-        return const Center(child: Text('Calculator Page'));
-      default:
-        return const Center(child: Text('Welcome to the IMC Calculator!'));
-    }
+    _currentWidget = buildPage(_currentIndex); // Use the imported buildPage function
   }
 
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
-      _currentWidget = _buildPage(index);
+      _currentWidget = buildPage(index); // Use the imported buildPage function
     });
   }
 
