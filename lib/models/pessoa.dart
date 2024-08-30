@@ -1,11 +1,12 @@
+//lib/models/pessoa.dart
 class Pessoa {
-  final String _nome;
-  final double _altura;
-  final double _peso;
+  final String nome;
+  final double altura;
+  final double peso;
+  double imc = 0.0;
+  String textImcAnalyze = '';
 
-  Pessoa(this._nome, this._altura, this._peso);
+  Pessoa(this.nome, this.altura, this.peso, [double? imc, String? textImcAnalyze]);
 
-  double get altura => _altura;
-  double get peso => _peso;
-  String get nome => _nome;
+  calcularIMC(double altura, double peso) {}
 }

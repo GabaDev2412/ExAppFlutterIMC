@@ -1,12 +1,23 @@
+// lib/pages/build_page.dart
 import 'package:flutter/material.dart';
 import 'package:myapp/pages/imc_page.dart';
+import 'package:myapp/pages/list_imc_page.dart';
+import 'package:myapp/models/pessoa.dart';
 
-Widget buildPage(int index) {
+Widget buildPage(int index, List<Pessoa> pessoas, String imc, String textImcAnalyze) {
   switch (index) {
     case 0:
-      return const ImcPage(); // Use o widget ImcPage para a página de cálculo
+      return ImcPage(
+        onIMCUpdated: (pessoa) {
+          pessoas.add(pessoa);
+        },
+      );
     case 1:
-      return const Center(child: Text('Calculator Page'));
+      return ListImcPage(
+        imcsPessoas: pessoas,
+        imc: imc,
+        textImcAnalyze: textImcAnalyze,
+      );
     default:
       return const Center(child: Text('Welcome to the IMC Calculator!'));
   }

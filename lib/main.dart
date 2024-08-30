@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/models/pessoa.dart';
+import 'package:myapp/utils/calcular_imc.dart';
 import 'package:myapp/widgets/bottom_bar.dart';
 import 'package:myapp/pages/build_page.dart';
 
@@ -33,20 +35,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
-  late Widget _currentWidget;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentWidget = buildPage(_currentIndex); // Use the imported buildPage function
-  }
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-      _currentWidget = buildPage(index); // Use the imported buildPage function
-    });
-  }
+  final List<Pessoa> _pessoas = [];
+  String _imc = '';
+  String _textImcAnalyze = '';
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +45,23 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: _currentWidget,
+      body: buildPage(_currentIndex, _pessoas, _imc, _textImcAnalyze),
       bottomNavigationBar: BottomBar(
         currentIndex: _currentIndex,
-        onTabTapped: _onTabTapped,
+        onTabTapped: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
+  }
+
+  void updateIMCList(Pessoa pessoa) {
+    setState(() {
+      _pessoas.add(pessoa);
+      _imc = pessoa.calcularIMC(pessoa.altura, pessoa.peso).toStringAsFixed(2);
+      _textImcAnalyze = analiseIMC(double.parse(_imc));
+    });
   }
 }
